@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIM-RT v1.6 - Profil Keluarga Terpadu</title>
+    <title>SIM-RT v2.0 (Final) - Sistem Informasi Manajemen RT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -33,8 +33,8 @@
     <div id="loginView" class="fixed inset-0 z-[200] bg-slate-100 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl shadow-xl border border-slate-200 w-full max-w-md overflow-hidden">
             <div class="bg-blue-800 p-8 text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-200 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-                <h2 class="text-2xl font-black text-white tracking-tight">SIM-RT v1.6</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-200 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 001 1m-6 0h6" /></svg>
+                <h2 class="text-2xl font-black text-white tracking-tight">SIM-RT v2.0 Final</h2>
                 <p class="text-blue-200 text-sm mt-1">Sistem Informasi Manajemen RT</p>
             </div>
             <div class="p-8">
@@ -53,7 +53,7 @@
                     </button>
                 </form>
                 <div class="mt-6 text-center border-t border-slate-100 pt-6">
-                    <p class="text-xs text-slate-400 font-medium mb-3">Akun Demo (Password: 123456):</p>
+                    <p class="text-xs text-slate-400 font-medium mb-3">Akun Demo (Password Default: 123456):</p>
                     <div class="flex flex-wrap justify-center gap-2">
                         <span onclick="autoFillLogin('admin')" class="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Admin</span>
                         <span onclick="autoFillLogin('pengurus')" class="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Pengurus</span>
@@ -64,14 +64,14 @@
         </div>
     </div>
 
-    <!-- MAIN APP CONTAINER (Hidden initially) -->
+    <!-- MAIN APP CONTAINER -->
     <div id="mainAppView" class="hidden h-screen bg-slate-50 w-full no-print">
         <!-- Sidebar -->
         <aside id="sidebar" class="hidden md:flex flex-col w-64 bg-blue-800 text-white shadow-xl z-50 flex-shrink-0 absolute md:relative h-full transition-all">
             <div class="h-16 flex items-center px-6 border-b border-blue-700 bg-blue-900">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 001 1m-6 0h6" /></svg>
                 <div class="flex flex-col ml-2">
-                    <span class="font-bold text-xl tracking-tight leading-none pt-1">SIM-RT v1.6</span>
+                    <span class="font-bold text-xl tracking-tight leading-none pt-1">SIM-RT Final</span>
                     <span id="appSubtitle" class="text-[10px] text-blue-300 mt-0.5">RT 00 / RW 00</span>
                 </div>
             </div>
@@ -201,7 +201,7 @@
                 <div id="view-keuangan" class="hidden space-y-6">
                     <div class="flex justify-between items-center">
                         <h2 class="text-2xl font-bold text-slate-800">Laporan Keuangan</h2>
-                        <button onclick="cetakLaporanKeuangan()" class="bg-slate-800 hover:bg-slate-900 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-sm flex items-center gap-2 transition-all">
+                        <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-sm flex items-center gap-2 transition-all">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                             Cetak Laporan
                         </button>
@@ -244,9 +244,7 @@
                         <button onclick="openModal('pengumumanModal')" class="pengurus-only bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-sm transition-all">Buat Pengumuman</button>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <!-- Feed -->
                         <div class="lg:col-span-2 space-y-4" id="feedPengumuman"></div>
-                        <!-- Jadwal -->
                         <div class="bg-white rounded-xl shadow-sm border border-slate-200 h-fit overflow-hidden">
                             <div class="p-4 border-b bg-slate-50 flex items-center gap-2">
                                 <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -278,7 +276,6 @@
                         </div>
                         <button onclick="openModal('panicModal')" class="bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-black py-4 px-10 rounded-full shadow-xl animate-pulse">SOS DARURAT</button>
                     </div>
-                    
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                         <div class="border-b bg-slate-50 flex justify-between items-center px-4">
                             <nav class="flex -mb-px">
@@ -344,9 +341,7 @@
                              Tambah Pengurus
                         </button>
                     </div>
-                    
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="organigramCards"></div>
-                    
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                         <table class="min-w-full divide-y divide-slate-100 text-sm">
                             <thead class="bg-slate-50"><tr><th class="px-6 py-3 text-left font-bold text-slate-500">Nama Warga</th><th class="px-6 py-3 text-left font-bold text-slate-500">Jabatan</th><th class="px-6 py-3 text-center font-bold text-slate-500">Hak Akses Sistem</th><th class="px-6 py-3 text-center font-bold text-slate-500">Status</th><th class="px-6 py-3 text-right font-bold text-slate-500 admin-only">Aksi</th></tr></thead>
@@ -384,7 +379,7 @@
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col gap-4">
                             <div class="flex-1">
                                 <h3 class="font-bold text-slate-800 border-b pb-2 mb-3">Backup Data Sistem</h3>
-                                <p class="text-sm text-slate-500">Ekspor seluruh data Warga, Keuangan, dan Inventaris ke dalam format JSON. Berguna untuk keperluan pencadangan (backup).</p>
+                                <p class="text-sm text-slate-500">Ekspor seluruh data Warga, Keuangan, dan Inventaris ke format JSON.</p>
                             </div>
                             <button onclick="exportData()" class="bg-slate-800 hover:bg-slate-900 text-white px-4 py-2.5 rounded-lg text-sm font-bold transition-all flex justify-center items-center gap-2">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> Ekspor Data (JSON)
@@ -393,7 +388,7 @@
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col gap-4">
                             <div class="flex-1">
                                 <h3 class="font-bold text-slate-800 border-b pb-2 mb-3">Log Riwayat Aktivitas</h3>
-                                <p class="text-sm text-slate-500">Pantau seluruh perubahan data yang dilakukan oleh Admin atau Pengurus di dalam sistem.</p>
+                                <p class="text-sm text-slate-500">Pantau seluruh perubahan data yang dilakukan di dalam sistem.</p>
                             </div>
                             <button onclick="openModal('riwayatModal'); renderRiwayat();" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-bold transition-all flex justify-center items-center gap-2">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Lihat Riwayat Aktivitas
@@ -407,7 +402,7 @@
                             <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             Koneksi Cloud Backend (Google Apps Script)
                         </h3>
-                        <p class="text-sm text-slate-500 mb-4">Hubungkan SIM-RT ke Google Apps Script (GAS) untuk sinkronisasi database cloud. Masukkan URL Web App GAS Anda di bawah ini.</p>
+                        <p class="text-sm text-slate-500 mb-4">Hubungkan SIM-RT ke Google Apps Script (GAS) untuk sinkronisasi database cloud.</p>
                         <div class="flex flex-col md:flex-row gap-4 md:items-end">
                             <div class="flex-1">
                                 <label class="text-xs font-bold text-slate-500">URL Web App GAS</label>
@@ -420,11 +415,10 @@
                         </div>
                         <div id="gasStatusInfo" class="mt-4 hidden p-3 rounded-xl border text-sm font-bold transition-all"></div>
                         
-                        <!-- NEW: TOMBOL GENERATE KODE GAS -->
                         <div class="mt-6 pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                             <div>
                                 <h4 class="text-sm font-bold text-slate-800 mb-1">Belum Punya Script Backend?</h4>
-                                <p class="text-xs text-slate-500 max-w-md">Sistem dapat membuatkan kerangka kode Google Script otomatis yang memuat data aplikasi saat ini (sebagai data dummy awal).</p>
+                                <p class="text-xs text-slate-500 max-w-md">Buat kerangka kode Google Script otomatis yang memuat data aplikasi saat ini.</p>
                             </div>
                             <button onclick="openGasCodeModal()" class="bg-slate-800 hover:bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all flex items-center gap-2 flex-shrink-0">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
@@ -451,7 +445,6 @@
                 <button onclick="closeModal('detailKKModal')" class="text-slate-400 hover:text-slate-600 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             </div>
             
-            <!-- TABS UNTUK PROFIL KELUARGA -->
             <div class="border-b bg-white px-6 pt-2 overflow-x-auto">
                 <nav class="flex gap-6 -mb-px w-max">
                     <button onclick="switchProfilTab('anggota')" id="ptab-anggota" class="py-3 px-1 text-sm font-bold border-b-2 border-blue-600 text-blue-600">Anggota Keluarga</button>
@@ -462,8 +455,6 @@
             </div>
 
             <div class="p-6 overflow-y-auto flex-1 bg-slate-50/50">
-                
-                <!-- TAB 1: ANGGOTA KELUARGA -->
                 <div id="pcontent-anggota" class="space-y-4">
                     <div class="flex justify-between items-center mb-2">
                         <h4 class="font-bold text-slate-800">Daftar Anggota</h4>
@@ -474,19 +465,13 @@
                     <div class="bg-white rounded-xl overflow-hidden border border-slate-200">
                         <table class="w-full text-left text-sm divide-y divide-slate-200">
                             <thead class="bg-slate-100 text-[10px] font-black uppercase text-slate-500">
-                                <tr>
-                                    <th class="p-4">Nama Lengkap</th>
-                                    <th class="p-4">Hubungan</th>
-                                    <th class="p-4">NIK</th>
-                                    <th class="p-4 text-right" id="thAksiDetail">Aksi</th>
-                                </tr>
+                                <tr><th class="p-4">Nama Lengkap</th><th class="p-4">Hubungan</th><th class="p-4">NIK</th><th class="p-4 text-right" id="thAksiDetail">Aksi</th></tr>
                             </thead>
                             <tbody id="detailKKTable" class="divide-y divide-slate-100"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- TAB 2: IURAN RT -->
                 <div id="pcontent-iuran" class="hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
                         <div>
@@ -508,7 +493,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 3: JADWAL RONDA -->
                 <div id="pcontent-ronda" class="hidden space-y-4">
                     <h4 class="font-bold text-slate-800 text-sm">Jadwal Ronda Anggota Keluarga</h4>
                     <div class="bg-white rounded-xl overflow-hidden border border-slate-200">
@@ -521,7 +505,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 4: AKUN & LOGIN -->
                 <div id="pcontent-akun" class="hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
                         <h4 class="font-bold text-slate-800 mb-4">Pengaturan Akun & Login Keluarga</h4>
@@ -548,7 +531,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -578,7 +560,7 @@
         </div>
     </div>
 
-    <!-- Form Warga Modal (Untuk Tambah/Edit Warga) -->
+    <!-- Form Warga Modal (Tambah/Edit Warga) -->
     <div id="formWargaModal" class="fixed inset-0 z-[60] hidden flex items-center justify-center px-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl">
             <form id="wargaForm" onsubmit="handleWargaSubmit(event)">
@@ -597,13 +579,7 @@
                     <div class="space-y-1"><label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Nama Lengkap</label><input id="warga_nama" required placeholder="Nama lengkap..." class="w-full border-slate-200 border p-2.5 rounded-xl outline-none focus:border-blue-500"></div>
                     <div class="space-y-1"><label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Hubungan dgn KK</label>
                         <select id="warga_hubungan" class="w-full border-slate-200 border p-2.5 rounded-xl bg-white outline-none focus:border-blue-500">
-                            <option value="Kepala Keluarga">Kepala Keluarga</option>
-                            <option value="Istri">Istri</option>
-                            <option value="Suami">Suami</option>
-                            <option value="Anak">Anak</option>
-                            <option value="Orang Tua">Orang Tua</option>
-                            <option value="Mertua">Mertua</option>
-                            <option value="Famili Lain">Famili Lain</option>
+                            <option value="Kepala Keluarga">Kepala Keluarga</option><option value="Istri">Istri</option><option value="Suami">Suami</option><option value="Anak">Anak</option><option value="Orang Tua">Orang Tua</option><option value="Mertua">Mertua</option><option value="Famili Lain">Famili Lain</option>
                         </select>
                     </div>
                     <div class="space-y-1"><label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Pendidikan</label>
@@ -653,17 +629,13 @@
                         <div>
                             <label class="text-xs font-bold text-slate-500">Kategori</label>
                             <select id="infoKategori" class="w-full border border-slate-200 p-2.5 rounded-xl bg-white focus:outline-none focus:border-blue-500" required>
-                                <option value="Informasi Umum">Informasi Umum</option>
-                                <option value="Kegiatan">Kegiatan Warga</option>
-                                <option value="Keamanan">Keamanan</option>
-                                <option value="Darurat">Darurat</option>
+                                <option value="Informasi Umum">Informasi Umum</option><option value="Kegiatan">Kegiatan Warga</option><option value="Keamanan">Keamanan</option><option value="Darurat">Darurat</option>
                             </select>
                         </div>
                         <div>
                             <label class="text-xs font-bold text-slate-500">Tipe</label>
                             <select id="infoTipe" onchange="toggleTanggalAcara()" class="w-full border border-slate-200 p-2.5 rounded-xl bg-white focus:outline-none focus:border-blue-500" required>
-                                <option value="Pengumuman">Pengumuman Saja</option>
-                                <option value="Undangan">Undangan/Jadwal</option>
+                                <option value="Pengumuman">Pengumuman Saja</option><option value="Undangan">Undangan/Jadwal</option>
                             </select>
                         </div>
                     </div>
@@ -712,10 +684,7 @@
                     <div>
                         <label class="text-xs font-bold text-slate-500">Kategori</label>
                         <select id="invKategori" class="w-full border border-slate-200 p-2.5 rounded-xl bg-white focus:outline-none focus:border-blue-500">
-                            <option value="Inventaris Acara">Inventaris Acara</option>
-                            <option value="Pos Ronda / Keamanan">Pos Ronda / Keamanan</option>
-                            <option value="Alat Kebersihan">Alat Kebersihan</option>
-                            <option value="Lainnya">Lainnya</option>
+                            <option value="Inventaris Acara">Inventaris Acara</option><option value="Pos Ronda / Keamanan">Pos Ronda / Keamanan</option><option value="Alat Kebersihan">Alat Kebersihan</option><option value="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
@@ -723,9 +692,7 @@
                         <div>
                             <label class="text-xs font-bold text-slate-500">Kondisi Barang</label>
                             <select id="invKondisi" class="w-full border border-slate-200 p-2.5 rounded-xl bg-white focus:outline-none focus:border-blue-500">
-                                <option value="Baik">Baik</option>
-                                <option value="Rusak Ringan">Rusak Ringan</option>
-                                <option value="Rusak Berat">Rusak Berat</option>
+                                <option value="Baik">Baik</option><option value="Rusak Ringan">Rusak Ringan</option><option value="Rusak Berat">Rusak Berat</option>
                             </select>
                         </div>
                     </div>
@@ -744,10 +711,7 @@
             <form id="peminjamanForm" onsubmit="handlePeminjamanSubmit(event)">
                 <div class="p-6 border-b bg-slate-50"><h3 class="font-black text-slate-800 text-lg">Catat Peminjaman</h3></div>
                 <div class="p-6 space-y-4">
-                    <div>
-                        <label class="text-xs font-bold text-slate-500">Pilih Barang Tersedia</label>
-                        <select id="pinjamBarangId" class="w-full border border-slate-200 p-2.5 rounded-xl bg-white focus:outline-none focus:border-blue-500" required></select>
-                    </div>
+                    <div><label class="text-xs font-bold text-slate-500">Pilih Barang Tersedia</label><select id="pinjamBarangId" class="w-full border border-slate-200 p-2.5 rounded-xl bg-white focus:outline-none focus:border-blue-500" required></select></div>
                     <div class="grid grid-cols-2 gap-4">
                         <div><label class="text-xs font-bold text-slate-500">Tanggal Pinjam</label><input type="date" id="pinjamTgl" class="w-full border border-slate-200 p-2.5 rounded-xl focus:outline-none focus:border-blue-500" required></div>
                         <div><label class="text-xs font-bold text-slate-500">Jumlah Unit</label><input type="number" id="pinjamJumlah" min="1" value="1" class="w-full border border-slate-200 p-2.5 rounded-xl focus:outline-none focus:border-blue-500" required></div>
@@ -783,30 +747,21 @@
                     <div>
                         <label class="text-xs font-bold text-slate-500">Hak Akses Sistem</label>
                         <select id="pengurusHakAkses" class="w-full border border-slate-200 p-2.5 rounded-xl bg-white focus:outline-none focus:border-blue-500" required>
-                            <option value="Admin">Admin (Akses Penuh)</option>
-                            <option value="Pengurus">Pengurus (Keuangan/Aset)</option>
-                            <option value="Warga">Warga Biasa</option>
+                            <option value="Admin">Admin (Akses Penuh)</option><option value="Pengurus">Pengurus (Keuangan/Aset)</option><option value="Warga">Warga Biasa</option>
                         </select>
                     </div>
                     <div>
                         <label class="text-xs font-bold text-slate-500">Status</label>
                         <select id="pengurusStatus" class="w-full border border-slate-200 p-2.5 rounded-xl bg-white focus:outline-none focus:border-blue-500">
-                            <option value="Aktif">Aktif</option>
-                            <option value="Purna Tugas">Purna Tugas</option>
+                            <option value="Aktif">Aktif</option><option value="Purna Tugas">Purna Tugas</option>
                         </select>
                     </div>
                     
                     <div class="col-span-full border-t border-slate-200 pt-4 mt-2">
                         <p class="text-sm font-bold text-slate-800 mb-3">Informasi Akun Login</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="text-xs font-bold text-slate-500">Username</label>
-                                <input id="pengurusUsername" placeholder="Buat username..." class="w-full border border-slate-200 p-2.5 rounded-xl focus:outline-none focus:border-blue-500" required>
-                            </div>
-                            <div>
-                                <label class="text-xs font-bold text-slate-500">Password</label>
-                                <input type="password" id="pengurusPassword" minlength="6" placeholder="Minimal 6 karakter" class="w-full border border-slate-200 p-2.5 rounded-xl focus:outline-none focus:border-blue-500" required>
-                            </div>
+                            <div><label class="text-xs font-bold text-slate-500">Username</label><input id="pengurusUsername" placeholder="Buat username..." class="w-full border border-slate-200 p-2.5 rounded-xl focus:outline-none focus:border-blue-500" required></div>
+                            <div><label class="text-xs font-bold text-slate-500">Password</label><input type="password" id="pengurusPassword" minlength="6" placeholder="Minimal 6 karakter" class="w-full border border-slate-200 p-2.5 rounded-xl focus:outline-none focus:border-blue-500" required></div>
                         </div>
                     </div>
                 </div>
@@ -895,7 +850,7 @@
         </div>
     </div>
 
-    <!-- NEW: Modal Generate GAS Code -->
+    <!-- Modal Generate GAS Code -->
     <div id="gasCodeModal" class="fixed inset-0 z-[300] hidden flex items-center justify-center px-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white rounded-2xl w-full max-w-4xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
             <div class="p-6 border-b bg-slate-50 flex justify-between items-center">
@@ -916,7 +871,7 @@
     </div>
 
     <!-- Modal Konfirmasi Global (Pengganti window.confirm) -->
-    <div id="confirmModal" class="fixed inset-0 z-[300] hidden flex items-center justify-center px-4 bg-slate-900/60 backdrop-blur-sm">
+    <div id="confirmModal" class="fixed inset-0 z-[400] hidden flex items-center justify-center px-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl text-center p-8">
             <h3 class="font-black text-xl text-slate-800 mb-2">Konfirmasi</h3>
             <p id="confirmMessage" class="text-sm text-slate-500 mb-6 whitespace-pre-line"></p>
@@ -928,7 +883,7 @@
     </div>
 
     <!-- Modal Peringatan Global (Pengganti window.alert) -->
-    <div id="alertModal" class="fixed inset-0 z-[300] hidden flex items-center justify-center px-4 bg-slate-900/60 backdrop-blur-sm">
+    <div id="alertModal" class="fixed inset-0 z-[400] hidden flex items-center justify-center px-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl text-center p-8">
             <h3 class="font-black text-xl text-slate-800 mb-2">Perhatian</h3>
             <p id="alertMessage" class="text-sm text-slate-500 mb-6 whitespace-pre-line"></p>
@@ -937,7 +892,7 @@
     </div>
 
     <!-- Toast -->
-    <div id="toast" class="fixed top-4 right-4 z-[100] transform translate-y-[-100%] opacity-0 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300">
+    <div id="toast" class="fixed top-4 right-4 z-[500] transform translate-y-[-100%] opacity-0 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300">
         <span id="toastMessage" class="text-sm font-bold tracking-tight"></span>
     </div>
 
@@ -978,7 +933,6 @@
         ]; 
         let riwayatData = [];
         let profilWilayah = { desa: "Desa Suka Maju", rw: "05", rt: "02" };
-        let backendUrl = ""; // Menyimpan URL GAS
         let chartStatusInstance = null; let chartPendidikanInstance = null;
 
         const formatRp = (num) => new Intl.NumberFormat('id-ID', {style: 'currency', currency: 'IDR', minimumFractionDigits: 0}).format(num);
@@ -986,7 +940,6 @@
         window.onload = () => { 
             renderProfilWilayah();
             renderNotifikasi();
-            // Show login screen by default, main app is hidden in HTML
         };
 
         // --- GLOBAL CUSTOM POPUP (ALERT/CONFIRM) ---
@@ -1015,20 +968,17 @@
             const user = document.getElementById('loginUsername').value;
             const pass = document.getElementById('loginPassword').value;
 
-            // Simple validation
             const foundUser = akunData.find(a => a.username === user);
             
             if (foundUser && foundUser.password === pass) {
                 currentUser = foundUser;
                 document.getElementById('loginError').classList.add('hidden');
                 
-                // Apply role and UI updates
                 document.body.className = "bg-slate-50 text-slate-800 min-h-screen overflow-hidden role-" + currentUser.role; 
                 document.getElementById('userDisplayName').innerText = currentUser.nama;
                 document.getElementById('userAvatar').innerText = currentUser.nama.charAt(0).toUpperCase();
                 document.getElementById('userDisplayRole').innerText = currentUser.role === 'admin' ? 'Ketua RT (Admin)' : (currentUser.role === 'pengurus' ? 'Pengurus' : 'Warga Biasa');
                 
-                // Hide Login, Show App (Gunakan replace flex/hidden untuk cegah konflik)
                 document.getElementById('loginView').classList.remove('flex');
                 document.getElementById('loginView').classList.add('hidden');
                 document.getElementById('mainAppView').classList.remove('hidden');
@@ -1068,7 +1018,7 @@
         function toggleInbox() { document.getElementById('inboxDropdown').classList.toggle('hidden'); }
         function openModal(id) { document.getElementById(id)?.classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id)?.classList.add('hidden'); }
-        function showToast(msg) {
+        function showToast(msg, type="success") {
             const toast = document.getElementById('toast');
             document.getElementById('toastMessage').innerText = msg;
             toast.classList.remove('translate-y-[-100%]', 'opacity-0');
@@ -1126,6 +1076,7 @@
             if (view === 'pengaturan') { renderRiwayat(); renderProfilWilayah(); }
         }
 
+        // --- DASHBOARD ---
         function renderDashboard() {
             document.getElementById('dashTotalWarga').innerText = wargaData.length;
             document.getElementById('dashTotalKK').innerText = new Set(wargaData.map(w => w.no_kk)).size;
@@ -1134,21 +1085,26 @@
             let saldo = transaksiData.reduce((acc, t) => t.jenis === 'Pemasukan' ? acc + t.nominal : acc - t.nominal, 0);
             document.getElementById('dashSaldo').innerText = formatRp(saldo);
 
-            const ctxStatus = document.getElementById('chartStatusData').getContext('2d');
-            if (chartStatusInstance) chartStatusInstance.destroy();
-            chartStatusInstance = new Chart(ctxStatus, {
-                type: 'doughnut',
-                data: { labels: ['Warga Tetap', 'Kontrak/Kos'], datasets: [{ data: [85, 15], backgroundColor: ['#3b82f6', '#10b981'], borderWidth: 0 }] },
-                options: { responsive: true, maintainAspectRatio: false, cutout: '70%' }
-            });
+            // Hide/Show canvases if necessary to prevent ChartJS errors when hidden
+            const ctxStatus = document.getElementById('chartStatusData');
+            if(ctxStatus) {
+                if (chartStatusInstance) chartStatusInstance.destroy();
+                chartStatusInstance = new Chart(ctxStatus.getContext('2d'), {
+                    type: 'doughnut',
+                    data: { labels: ['Warga Tetap', 'Kontrak/Kos'], datasets: [{ data: [85, 15], backgroundColor: ['#3b82f6', '#10b981'], borderWidth: 0 }] },
+                    options: { responsive: true, maintainAspectRatio: false, cutout: '70%' }
+                });
+            }
 
-            const ctxPend = document.getElementById('chartPendidikanData').getContext('2d');
-            if (chartPendidikanInstance) chartPendidikanInstance.destroy();
-            chartPendidikanInstance = new Chart(ctxPend, {
-                type: 'bar',
-                data: { labels: ['SMA', 'Sarjana', 'SMP', 'SD'], datasets: [{ label: 'Jiwa', data: [12, 8, 10, 5], backgroundColor: '#6366f1', borderRadius: 8 }] },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
+            const ctxPend = document.getElementById('chartPendidikanData');
+            if(ctxPend) {
+                if (chartPendidikanInstance) chartPendidikanInstance.destroy();
+                chartPendidikanInstance = new Chart(ctxPend.getContext('2d'), {
+                    type: 'bar',
+                    data: { labels: ['SMA', 'Sarjana', 'SMP', 'SD'], datasets: [{ label: 'Jiwa', data: [12, 8, 10, 5], backgroundColor: '#6366f1', borderRadius: 8 }] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
         }
 
         // --- MANAJEMEN WARGA / PROFIL KELUARGA ---
@@ -1165,7 +1121,6 @@
             });
             
             let filtered = Object.values(summary).filter(kk => kk.kepala.toLowerCase().includes(query) || kk.no_kk.includes(query));
-            
             if (currentUser.role === 'warga') filtered = filtered.filter(kk => kk.no_kk === currentUser.no_kk);
 
             filtered.forEach(kk => {
@@ -1179,7 +1134,6 @@
             });
         }
 
-        // FUNGSI UTAMA: MEMBUKA PROFIL KELUARGA LENGKAP
         function openDetailKK(no_kk) {
             const family = wargaData.filter(w => w.no_kk === no_kk);
             const head = family.find(f => f.hubungan_kk === 'Kepala Keluarga') || family[0];
@@ -1188,7 +1142,7 @@
             document.getElementById('detailKKTitle').innerText = (currentUser.role === 'warga') ? "Keluarga Saya" : "Keluarga " + head.nama;
             document.getElementById('detailKKSubtitle').innerHTML = `<span class="bg-blue-100 px-2 py-1 rounded">KK: ${no_kk}</span> <span>🏠 ${head.alamat}</span>`;
             
-            // Render Tab 1: Anggota
+            // Tab 1: Anggota
             document.getElementById('btnTambahAnggota').style.display = canEdit ? 'flex' : 'none';
             document.getElementById('thAksiDetail').style.display = canEdit ? 'table-cell' : 'none';
             document.getElementById('btnTambahAnggota').setAttribute('onclick', `openFormWarga('', '${no_kk}', '${head.alamat}')`);
@@ -1205,44 +1159,28 @@
                 </tr>
             `).join('');
 
-            // Render Tab 2: Iuran RT
+            // Tab 2: Iuran RT
             const familyIds = family.map(f => f.id);
-            const currentMonth = new Date().getMonth();
-            const currentYear = new Date().getFullYear();
-            
-            const hasPaidThisMonth = transaksiData.some(t => 
-                familyIds.includes(t.wargaId) && 
-                t.kategori === 'Iuran Warga' && 
-                new Date(t.tanggal).getMonth() === currentMonth && 
-                new Date(t.tanggal).getFullYear() === currentYear
-            );
+            const cm = new Date().getMonth(); const cy = new Date().getFullYear();
+            const hasPaidThisMonth = transaksiData.some(t => familyIds.includes(t.wargaId) && t.kategori === 'Iuran Warga' && new Date(t.tanggal).getMonth() === cm && new Date(t.tanggal).getFullYear() === cy);
             
             document.getElementById('profilStatusIuran').innerHTML = hasPaidThisMonth 
                 ? '<span class="bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-full text-xs font-black shadow-sm flex items-center gap-2 w-fit"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> LUNAS BULAN INI</span>'
                 : '<span class="bg-rose-100 text-rose-700 px-4 py-1.5 rounded-full text-xs font-black shadow-sm flex items-center gap-2 w-fit"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> BELUM BAYAR</span>';
 
             const riwayatIuran = transaksiData.filter(t => familyIds.includes(t.wargaId) && t.kategori === 'Iuran Warga').sort((a,b) => new Date(b.tanggal) - new Date(a.tanggal));
-            
             document.getElementById('profilIuranTable').innerHTML = riwayatIuran.length > 0 ? riwayatIuran.map(t => `
-                <tr>
-                    <td class="p-4 text-xs">${new Date(t.tanggal).toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'})}</td>
-                    <td class="p-4 text-xs font-bold text-slate-700">${t.keterangan}</td>
-                    <td class="p-4 text-xs font-bold text-emerald-600 text-right">${formatRp(t.nominal)}</td>
-                </tr>
+                <tr><td class="p-4 text-xs">${new Date(t.tanggal).toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'})}</td><td class="p-4 text-xs font-bold text-slate-700">${t.keterangan}</td><td class="p-4 text-xs font-bold text-emerald-600 text-right">${formatRp(t.nominal)}</td></tr>
             `).join('') : `<tr><td colspan="3" class="p-4 text-center text-xs text-slate-500 italic">Belum ada riwayat pembayaran iuran RT.</td></tr>`;
 
-            // Render Tab 3: Jadwal Ronda
+            // Tab 3: Jadwal Ronda
             const familyNames = family.map(f => f.nama);
             const jadwalRondaKK = rondaData.filter(r => familyNames.includes(r.nama));
-            
             document.getElementById('profilRondaTable').innerHTML = jadwalRondaKK.length > 0 ? jadwalRondaKK.map(r => `
-                <tr>
-                    <td class="p-4 font-bold text-blue-600 text-sm">${r.hari} Malam</td>
-                    <td class="p-4 text-sm font-bold text-slate-700">${r.nama}</td>
-                </tr>
+                <tr><td class="p-4 font-bold text-blue-600 text-sm">${r.hari} Malam</td><td class="p-4 text-sm font-bold text-slate-700">${r.nama}</td></tr>
             `).join('') : `<tr><td colspan="2" class="p-4 text-center text-xs text-slate-500 italic">Tidak ada anggota keluarga yang terdaftar dalam jadwal ronda saat ini.</td></tr>`;
 
-            // Render Tab 4: Akun & Login (Hanya tampil jika ada akses edit dan akun loginnya tersedia)
+            // Tab 4: Akun & Login
             const tabAkunBtn = document.getElementById('ptab-akun');
             if (canEdit && akunData.some(a => a.username === no_kk)) {
                 tabAkunBtn.style.display = 'inline-block';
@@ -1254,11 +1192,10 @@
                 tabAkunBtn.style.display = 'none';
             }
 
-            switchProfilTab('anggota'); // Default tab
+            switchProfilTab('anggota');
             openModal('detailKKModal');
         }
 
-        // TABS SWITCHER DI DALAM MODAL
         function switchProfilTab(tab) {
             ['anggota', 'iuran', 'ronda', 'akun'].forEach(t => {
                 const content = document.getElementById('pcontent-' + t);
@@ -1278,9 +1215,7 @@
             const passBaru = document.getElementById('profilPassBaru').value;
             const passKonfirm = document.getElementById('profilPassKonfirm').value;
 
-            if (passBaru !== passKonfirm) {
-                return customAlert("Password baru dan konfirmasi tidak cocok!");
-            }
+            if (passBaru !== passKonfirm) return customAlert("Password baru dan konfirmasi tidak cocok!");
 
             const akun = akunData.find(a => a.username === no_kk);
             if (akun) {
@@ -1294,7 +1229,6 @@
             }
         }
 
-        // --- FUNGSI PENDUKUNG (Tambah/Edit/Hapus Anggota) ---
         function openFormWarga(id, nokk, alamat) {
             document.getElementById('warga_id').value = id; document.getElementById('warga_no_kk').value = nokk; document.getElementById('warga_alamat_hidden').value = alamat;
             if(id) {
@@ -1343,20 +1277,16 @@
             const nama = document.getElementById('kk_nama').value;
             if(wargaData.some(w => w.no_kk === nokk)) return customAlert("Nomor KK tersebut sudah terdaftar!");
             
-            // Generate Random Password 6 Digit Angka
             const randomPass = Math.floor(100000 + Math.random() * 900000).toString();
             
             wargaData.push({ id: Date.now().toString(), no_kk: nokk, nik: document.getElementById('kk_nik').value, nama: nama, alamat: document.getElementById('kk_alamat').value, hubungan_kk: 'Kepala Keluarga', pendidikan: document.getElementById('kk_pendidikan').value });
             akunData.push({ username: nokk, password: randomPass, role: "warga", nama: nama, no_kk: nokk });
             
             closeModal('formKKModal'); renderTable();
-            
-            document.getElementById('credUser').innerText = nokk; 
-            document.getElementById('credPass').innerText = randomPass;
-            openModal('credentialModal');
+            document.getElementById('credUser').innerText = nokk; document.getElementById('credPass').innerText = randomPass; openModal('credentialModal');
         }
 
-        // RENDER KEUANGAN & FUNGSI TRANSAKSI
+        // --- KEUANGAN ---
         function renderKeuangan() {
             let masuk = 0; let keluar = 0;
             transaksiData.forEach(t => { if (t.jenis === 'Pemasukan') masuk += t.nominal; else keluar += t.nominal; });
@@ -1380,9 +1310,7 @@
             document.getElementById('transaksiJenis').value = jenis; 
             const kat = document.getElementById('transaksiKategori');
             if (kat) {
-                kat.innerHTML = jenis === 'Pemasukan' ? 
-                    `<option>Iuran Warga</option><option>Donasi</option>` : 
-                    `<option>Kebersihan</option><option>Perbaikan</option><option>Listrik/Air</option><option>Lainnya</option>`;
+                kat.innerHTML = jenis === 'Pemasukan' ? `<option>Iuran Warga</option><option>Donasi</option>` : `<option>Kebersihan</option><option>Perbaikan</option><option>Listrik/Air</option><option>Lainnya</option>`;
             }
             openModal('transaksiModal'); 
         }
@@ -1392,18 +1320,10 @@
             const jenis = document.getElementById('transaksiJenis').value;
             const nominal = parseInt(document.getElementById('transaksiNominal').value);
             const kategori = document.getElementById('transaksiKategori').value;
-            transaksiData.unshift({ 
-                id: "TRX-" + Date.now(), 
-                tanggal: new Date().toISOString(), 
-                jenis: jenis, 
-                kategori: kategori, 
-                nominal: nominal, 
-                keterangan: document.getElementById('transaksiKeterangan').value 
-            });
+            transaksiData.unshift({ id: "TRX-" + Date.now(), tanggal: new Date().toISOString(), jenis: jenis, kategori: kategori, nominal: nominal, keterangan: document.getElementById('transaksiKeterangan').value });
             logAktivitas('TRANSAKSI', `Pencatatan ${jenis}: ${kategori} - ${formatRp(nominal)}`);
             showToast("Transaksi berhasil dicatat"); 
-            closeModal('transaksiModal'); 
-            renderKeuangan();
+            closeModal('transaksiModal'); renderKeuangan();
         }
 
         function bayarIuran(wargaId, nama) {
@@ -1420,7 +1340,6 @@
             document.getElementById('tab-btn-transaksi').className = t === 'transaksi' ? "py-4 px-6 text-sm font-bold border-b-2 border-blue-600 text-blue-600" : "py-4 px-6 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700";
             document.getElementById('tab-btn-tagihan').className = t === 'tagihan' ? "py-4 px-6 text-sm font-bold border-b-2 border-blue-600 text-blue-600" : "py-4 px-6 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700";
         }
-        function cetakLaporanKeuangan() { window.print(); }
 
         // --- INFORMASI ---
         function renderInformasi() {
@@ -1443,16 +1362,11 @@
                     const card = document.createElement('div');
                     card.className = "bg-white p-6 rounded-2xl border shadow-sm";
                     card.innerHTML = `
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-bold text-slate-900">${post.judul}</h3>
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${badgeColor}">${post.kategori}</span>
-                        </div>
+                        <div class="flex justify-between items-start mb-2"><h3 class="text-lg font-bold text-slate-900">${post.judul}</h3><span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${badgeColor}">${post.kategori}</span></div>
                         <p class="text-xs text-slate-400 mb-4">Diposting: ${postDate}</p>
                         <p class="text-sm text-slate-600 leading-relaxed">${post.isi}</p>
                         ${txtAcara}
-                        <div class="mt-4 pt-4 border-t border-slate-100 text-right">
-                            <button onclick="hapusPengumuman('${post.id}')" class="text-xs font-bold text-red-500 hover:underline admin-only">Hapus Pengumuman</button>
-                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-100 text-right"><button onclick="hapusPengumuman('${post.id}')" class="text-xs font-bold text-red-500 hover:underline admin-only">Hapus Pengumuman</button></div>
                     `;
                     feedDiv.appendChild(card);
                 });
@@ -1488,27 +1402,16 @@
         function handlePengumumanSubmit(e) {
             e.preventDefault();
             const judul = document.getElementById('infoJudul').value;
-            pengumumanData.push({
-                id: "INFO-" + Date.now(),
-                judul: judul,
-                kategori: document.getElementById('infoKategori').value,
-                tipe: document.getElementById('infoTipe').value,
-                tanggalAcara: document.getElementById('infoTipe').value === 'Undangan' ? document.getElementById('infoTanggalAcara').value : null,
-                isi: document.getElementById('infoIsi').value,
-                tanggalPosting: new Date().toISOString()
-            });
+            pengumumanData.push({ id: "INFO-" + Date.now(), judul: judul, kategori: document.getElementById('infoKategori').value, tipe: document.getElementById('infoTipe').value, tanggalAcara: document.getElementById('infoTipe').value === 'Undangan' ? document.getElementById('infoTanggalAcara').value : null, isi: document.getElementById('infoIsi').value, tanggalPosting: new Date().toISOString() });
             logAktivitas('BROADCAST', `Membuat pengumuman: ${judul}`);
             tambahNotifikasi(`Pengumuman Baru: ${judul}`);
-            closeModal('pengumumanModal');
-            renderInformasi();
-            showToast("Pengumuman berhasil diposting");
+            closeModal('pengumumanModal'); renderInformasi(); showToast("Pengumuman berhasil diposting");
         }
 
         function hapusPengumuman(id) {
             customConfirm("Hapus pengumuman ini?", () => {
                 pengumumanData = pengumumanData.filter(p => p.id !== id);
-                renderInformasi();
-                showToast("Pengumuman dihapus");
+                renderInformasi(); showToast("Pengumuman dihapus");
             });
         }
 
@@ -1524,30 +1427,20 @@
 
         function handleGaleriSubmit(e) {
             e.preventDefault();
-            galeriData.unshift({
-                id: Date.now(),
-                judul: document.getElementById('galeriJudul').value,
-                url: document.getElementById('galeriUrl').value,
-                tanggal: new Date().toISOString().split('T')[0]
-            });
+            galeriData.unshift({ id: Date.now(), judul: document.getElementById('galeriJudul').value, url: document.getElementById('galeriUrl').value, tanggal: new Date().toISOString().split('T')[0] });
             logAktivitas('UPLOAD', `Menambah foto galeri: ${document.getElementById('galeriJudul').value}`);
-            showToast("Foto berhasil diunggah");
-            closeModal('galeriModal');
-            renderGaleri();
+            showToast("Foto berhasil diunggah"); closeModal('galeriModal'); renderGaleri();
         }
 
         function deleteGaleri(id) {
             customConfirm("Hapus foto dari galeri?", () => {
-                galeriData = galeriData.filter(g => g.id !== id);
-                renderGaleri();
-                showToast("Foto dihapus");
+                galeriData = galeriData.filter(g => g.id !== id); renderGaleri(); showToast("Foto dihapus");
             });
         }
 
         // --- KEAMANAN ---
         function renderKeamanan() {
             document.getElementById('rondaTable').innerHTML = rondaData.map(r => `<tr><td class="px-6 py-3 font-bold text-blue-600">${r.hari}</td><td class="px-6 py-3 font-semibold text-slate-700">${r.nama}</td><td class="px-6 py-3 text-right pengurus-only"><button onclick="deleteRonda('${r.id}')" class="text-rose-500 font-bold hover:underline">Hapus</button></td></tr>`).join('');
-            
             const kejad = document.getElementById('tab-content-kejadian');
             if (kejadianData.length === 0) {
                 kejad.innerHTML = `<div class="p-8 text-center text-slate-400">Belum ada laporan kejadian keamanan.</div>`;
@@ -1557,10 +1450,8 @@
         }
 
         function switchKeamananTab(tab) { 
-            document.getElementById('tab-content-ronda').classList.toggle('hidden', tab !== 'ronda');
-            document.getElementById('tab-content-kejadian').classList.toggle('hidden', tab !== 'kejadian');
-            document.getElementById('btn-group-ronda').classList.toggle('hidden', tab !== 'ronda');
-            document.getElementById('btn-group-kejadian').classList.toggle('hidden', tab !== 'kejadian');
+            document.getElementById('tab-content-ronda').classList.toggle('hidden', tab !== 'ronda'); document.getElementById('tab-content-kejadian').classList.toggle('hidden', tab !== 'kejadian');
+            document.getElementById('btn-group-ronda').classList.toggle('hidden', tab !== 'ronda'); document.getElementById('btn-group-kejadian').classList.toggle('hidden', tab !== 'kejadian');
             document.getElementById('tab-btn-ronda').className = tab === 'ronda' ? "py-4 px-6 text-sm font-bold border-b-2 border-blue-600 text-blue-600" : "py-4 px-6 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700";
             document.getElementById('tab-btn-kejadian').className = tab === 'kejadian' ? "py-4 px-6 text-sm font-bold border-b-2 border-blue-600 text-blue-600" : "py-4 px-6 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700";
         }
@@ -1569,19 +1460,15 @@
             e.preventDefault();
             rondaData.push({ id: "R-" + Date.now(), hari: document.getElementById('rondaHari').value, nama: document.getElementById('rondaNama').value });
             logAktivitas('JADWAL', `Atur jadwal ronda: ${document.getElementById('rondaNama').value}`);
-            showToast("Jadwal ronda ditambahkan");
-            closeModal('rondaModal');
-            renderKeamanan();
+            showToast("Jadwal ronda ditambahkan"); closeModal('rondaModal'); renderKeamanan();
         }
 
         function handleKejadianSubmit(e) {
             e.preventDefault();
             kejadianData.unshift({ id: "K-" + Date.now(), laporan: document.getElementById('kejadianLaporan').value, tanggal: new Date().toISOString() });
             logAktivitas('KEAMANAN', `Laporan Kejadian dicatat`);
-            showToast("Laporan kejadian berhasil dicatat");
-            tambahNotifikasi("Ada laporan keamanan baru!", "alert");
-            closeModal('kejadianModal');
-            renderKeamanan();
+            showToast("Laporan kejadian berhasil dicatat"); tambahNotifikasi("Ada laporan keamanan baru!", "alert");
+            closeModal('kejadianModal'); renderKeamanan();
         }
 
         function deleteRonda(id) { rondaData = rondaData.filter(r => r.id !== id); renderKeamanan(); showToast("Jadwal dihapus"); }
@@ -1592,90 +1479,51 @@
             kejadianData.unshift({ id: "K-" + Date.now(), laporan: "Sinyal SOS Darurat: " + jenis, tanggal: new Date().toISOString() });
             logAktivitas('DARURAT', `Panic Button SOS ditekan: ${jenis}`);
             tambahNotifikasi(`DARURAT SOS: Laporan ${jenis} Masuk!`, "alert");
-            closeModal('panicModal'); 
-            renderKeamanan();
+            closeModal('panicModal'); renderKeamanan();
             customAlert(`🚨 ALARM DARURAT 🚨\nAnda telah membunyikan alarm darurat untuk ${jenis}.\nNotifikasi segera disebar ke seluruh warga & pos jaga!`);
         }
 
         // --- INVENTARIS ---
         function renderInventaris() {
             let total = 0, rusak = 0, dipinjam = 0;
-            inventarisData.forEach(i => {
-                total += parseInt(i.jumlah);
-                if(i.kondisi !== 'Baik') rusak += parseInt(i.jumlah);
-                dipinjam += (parseInt(i.jumlah) - parseInt(i.tersedia));
-            });
-            document.getElementById('invTotalAset').innerText = total;
-            document.getElementById('invTotalRusak').innerText = rusak;
-            document.getElementById('invTotalPinjam').innerText = dipinjam;
+            inventarisData.forEach(i => { total += parseInt(i.jumlah); if(i.kondisi !== 'Baik') rusak += parseInt(i.jumlah); dipinjam += (parseInt(i.jumlah) - parseInt(i.tersedia)); });
+            document.getElementById('invTotalAset').innerText = total; document.getElementById('invTotalRusak').innerText = rusak; document.getElementById('invTotalPinjam').innerText = dipinjam;
 
-            const tbodyAset = document.getElementById('inventarisTable');
-            tbodyAset.innerHTML = inventarisData.map(i => {
+            document.getElementById('inventarisTable').innerHTML = inventarisData.map(i => {
                 const ketersediaanText = i.tersedia > 0 ? `${i.tersedia} Tersedia` : `Habis Dipinjam`;
-                return `<tr>
-                    <td class="px-6 py-3"><div class="font-bold text-slate-800 text-sm">${i.nama}</div><div class="text-[10px] text-slate-500">${i.kode} - ${i.kategori}</div></td>
-                    <td class="px-6 py-3 text-center"><span class="px-2 py-1 bg-slate-100 rounded text-xs font-bold border">${i.kondisi}</span></td>
-                    <td class="px-6 py-3 text-center"><span class="font-bold text-sm">${i.jumlah} Total</span><br><span class="text-[10px] ${i.tersedia>0?'text-blue-600':'text-red-500'}">${ketersediaanText}</span></td>
-                    <td class="px-6 py-3 text-right admin-only"><button onclick="hapusInventaris('${i.id}')" class="text-rose-500 font-bold hover:underline text-xs">Hapus</button></td>
-                </tr>`;
+                return `<tr><td class="px-6 py-3"><div class="font-bold text-slate-800 text-sm">${i.nama}</div><div class="text-[10px] text-slate-500">${i.kode} - ${i.kategori}</div></td><td class="px-6 py-3 text-center"><span class="px-2 py-1 bg-slate-100 rounded text-xs font-bold border">${i.kondisi}</span></td><td class="px-6 py-3 text-center"><span class="font-bold text-sm">${i.jumlah} Total</span><br><span class="text-[10px] ${i.tersedia>0?'text-blue-600':'text-red-500'}">${ketersediaanText}</span></td><td class="px-6 py-3 text-right admin-only"><button onclick="hapusInventaris('${i.id}')" class="text-rose-500 font-bold hover:underline text-xs">Hapus</button></td></tr>`;
             }).join('');
 
-            const tbodyPinjam = document.getElementById('peminjamanTable');
-            tbodyPinjam.innerHTML = peminjamanData.map(p => {
+            document.getElementById('peminjamanTable').innerHTML = peminjamanData.map(p => {
                 const brg = inventarisData.find(x => x.id === p.barangId);
                 const badge = p.status === 'Dipinjam' ? `<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-[10px] font-bold">Dipinjam</span>` : `<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-[10px] font-bold">Kembali</span>`;
                 const btn = p.status === 'Dipinjam' ? `<button onclick="kembalikanBarang('${p.id}')" class="bg-emerald-500 text-white px-2 py-1 rounded text-[10px] font-bold pengurus-only">Selesai</button>` : `<span class="text-slate-400 text-[10px] italic">Selesai</span>`;
-                return `<tr>
-                    <td class="px-6 py-3"><div class="text-xs text-slate-500">${p.tglPinjam}</div><div class="font-bold text-sm">${brg ? brg.nama : '-'} (${p.jumlah} unit)</div></td>
-                    <td class="px-6 py-3"><div class="font-bold text-sm text-slate-700">${p.peminjam}</div><div class="text-[10px] text-slate-500 max-w-xs truncate">${p.keperluan}</div></td>
-                    <td class="px-6 py-3 text-center">${badge}</td>
-                    <td class="px-6 py-3 text-right">${btn}</td>
-                </tr>`;
+                return `<tr><td class="px-6 py-3"><div class="text-xs text-slate-500">${p.tglPinjam}</div><div class="font-bold text-sm">${brg ? brg.nama : '-'} (${p.jumlah} unit)</div></td><td class="px-6 py-3"><div class="font-bold text-sm text-slate-700">${p.peminjam}</div><div class="text-[10px] text-slate-500 max-w-xs truncate">${p.keperluan}</div></td><td class="px-6 py-3 text-center">${badge}</td><td class="px-6 py-3 text-right">${btn}</td></tr>`;
             }).join('');
         }
 
         function switchInventarisTab(tab) {
-            document.getElementById('tab-content-aset').classList.toggle('hidden', tab !== 'aset');
-            document.getElementById('tab-content-pinjam').classList.toggle('hidden', tab !== 'pinjam');
-            document.getElementById('btn-group-aset').classList.toggle('hidden', tab !== 'aset');
-            document.getElementById('btn-group-pinjam').classList.toggle('hidden', tab !== 'pinjam');
+            document.getElementById('tab-content-aset').classList.toggle('hidden', tab !== 'aset'); document.getElementById('tab-content-pinjam').classList.toggle('hidden', tab !== 'pinjam');
+            document.getElementById('btn-group-aset').classList.toggle('hidden', tab !== 'aset'); document.getElementById('btn-group-pinjam').classList.toggle('hidden', tab !== 'pinjam');
             document.getElementById('tab-btn-aset').className = tab === 'aset' ? "py-4 px-6 text-sm font-bold border-b-2 border-blue-600 text-blue-600" : "py-4 px-6 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700";
             document.getElementById('tab-btn-pinjam').className = tab === 'pinjam' ? "py-4 px-6 text-sm font-bold border-b-2 border-blue-600 text-blue-600" : "py-4 px-6 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700";
         }
 
-        function openFormInventaris() {
-            document.getElementById('inventarisForm').reset();
-            document.getElementById('invEditId').value = '';
-            openModal('inventarisModal');
-        }
+        function openFormInventaris() { document.getElementById('inventarisForm').reset(); document.getElementById('invEditId').value = ''; openModal('inventarisModal'); }
 
         function handleInventarisSubmit(e) {
             e.preventDefault();
-            const nama = document.getElementById('invNama').value;
-            const jumlah = parseInt(document.getElementById('invJumlah').value);
-            inventarisData.push({
-                id: "INV-" + Date.now(),
-                kode: document.getElementById('invKode').value,
-                nama: nama,
-                kategori: document.getElementById('invKategori').value,
-                kondisi: document.getElementById('invKondisi').value,
-                jumlah: jumlah,
-                tersedia: jumlah
-            });
-            logAktivitas('INVENTARIS', `Menambah data aset: ${nama}`);
-            showToast("Aset berhasil ditambahkan");
-            closeModal('inventarisModal');
-            renderInventaris();
+            const nama = document.getElementById('invNama').value; const jumlah = parseInt(document.getElementById('invJumlah').value);
+            inventarisData.push({ id: "INV-" + Date.now(), kode: document.getElementById('invKode').value, nama: nama, kategori: document.getElementById('invKategori').value, kondisi: document.getElementById('invKondisi').value, jumlah: jumlah, tersedia: jumlah });
+            logAktivitas('INVENTARIS', `Menambah data aset: ${nama}`); showToast("Aset berhasil ditambahkan");
+            closeModal('inventarisModal'); renderInventaris();
         }
 
         function hapusInventaris(id) {
             const item = inventarisData.find(i => i.id === id);
             if(item.jumlah !== item.tersedia) return showToast("Gagal: Sedang dipinjam!", "error");
-            
             customConfirm(`Hapus barang ${item.nama}?`, () => {
-                inventarisData = inventarisData.filter(i => i.id !== id);
-                renderInventaris();
-                showToast("Aset dihapus");
+                inventarisData = inventarisData.filter(i => i.id !== id); renderInventaris(); showToast("Aset dihapus");
             });
         }
 
@@ -1683,50 +1531,34 @@
             document.getElementById('peminjamanForm').reset();
             const select = document.getElementById('pinjamBarangId');
             select.innerHTML = '<option value="">-- Pilih Barang --</option>';
-            inventarisData.filter(i => i.tersedia > 0).forEach(i => {
-                select.innerHTML += `<option value="${i.id}">${i.nama} (Sisa: ${i.tersedia})</option>`;
-            });
+            inventarisData.filter(i => i.tersedia > 0).forEach(i => { select.innerHTML += `<option value="${i.id}">${i.nama} (Sisa: ${i.tersedia})</option>`; });
             document.getElementById('pinjamTgl').value = new Date().toISOString().split('T')[0];
             openModal('peminjamanModal');
         }
 
         function handlePeminjamanSubmit(e) {
             e.preventDefault();
-            const brgId = document.getElementById('pinjamBarangId').value;
-            const jml = parseInt(document.getElementById('pinjamJumlah').value);
+            const brgId = document.getElementById('pinjamBarangId').value; const jml = parseInt(document.getElementById('pinjamJumlah').value);
             const item = inventarisData.find(i => i.id === brgId);
             
             if(!brgId) return showToast("Pilih barang", "error");
             if(jml > item.tersedia) return showToast(`Gagal: Maksimal ${item.tersedia}`, "error");
 
             item.tersedia -= jml;
-            peminjamanData.push({
-                id: "PINJAM-" + Date.now(),
-                tglPinjam: document.getElementById('pinjamTgl').value,
-                tglKembali: null,
-                barangId: brgId,
-                jumlah: jml,
-                peminjam: document.getElementById('pinjamNama').value,
-                keperluan: document.getElementById('pinjamKeperluan').value,
-                status: "Dipinjam"
-            });
+            peminjamanData.push({ id: "PINJAM-" + Date.now(), tglPinjam: document.getElementById('pinjamTgl').value, tglKembali: null, barangId: brgId, jumlah: jml, peminjam: document.getElementById('pinjamNama').value, keperluan: document.getElementById('pinjamKeperluan').value, status: "Dipinjam" });
             logAktivitas('INVENTARIS', `Peminjaman ${jml} unit ${item.nama} oleh ${document.getElementById('pinjamNama').value}`);
-            closeModal('peminjamanModal');
-            renderInventaris();
-            showToast("Peminjaman dicatat");
+            closeModal('peminjamanModal'); renderInventaris(); showToast("Peminjaman dicatat");
         }
 
         function kembalikanBarang(id) {
             customConfirm("Tandai barang telah dikembalikan?", () => {
                 const p = peminjamanData.find(x => x.id === id);
                 if(p) {
-                    p.status = 'Dikembalikan';
-                    p.tglKembali = new Date().toISOString();
+                    p.status = 'Dikembalikan'; p.tglKembali = new Date().toISOString();
                     const item = inventarisData.find(i => i.id === p.barangId);
                     if(item) item.tersedia += p.jumlah;
                     logAktivitas('INVENTARIS', `Pengembalian barang oleh ${p.peminjam}`);
-                    renderInventaris();
-                    showToast("Pengembalian sukses");
+                    renderInventaris(); showToast("Pengembalian sukses");
                 }
             });
         }
@@ -1741,10 +1573,7 @@
                 card.className = "bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-4";
                 card.innerHTML = `
                     <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-600 text-xl">${p ? p.nama.charAt(0) : '?'}</div>
-                    <div>
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">${role}</p>
-                        <h4 class="text-sm font-bold text-slate-800">${p ? p.nama : 'Belum Ada'}</h4>
-                    </div>
+                    <div><p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">${role}</p><h4 class="text-sm font-bold text-slate-800">${p ? p.nama : 'Belum Ada'}</h4></div>
                 `;
                 cardsContainer.appendChild(card);
             });
@@ -1811,14 +1640,10 @@
             if (hakAkses === "Pengurus") roleAkun = "pengurus";
 
             if (editId) {
-                // MODE EDIT
                 const pIndex = pengurusData.findIndex(p => p.id === editId);
                 if (pIndex > -1) {
                     const oldUsername = pengurusData[pIndex].username;
-
-                    if (oldUsername !== username && akunData.some(a => a.username === username)) {
-                        return customAlert("Username tersebut sudah digunakan! Silakan pilih username lain.");
-                    }
+                    if (oldUsername !== username && akunData.some(a => a.username === username)) return customAlert("Username tersebut sudah digunakan! Silakan pilih username lain.");
 
                     pengurusData[pIndex] = { ...pengurusData[pIndex], nama, jabatan, mulai, selesai, hakAkses, status, username };
 
@@ -1829,66 +1654,42 @@
                         akunData[aIndex].role = roleAkun;
                         akunData[aIndex].nama = nama;
                     }
-                    
-                    logAktivitas('SYSTEM', `Edit Data Pengurus: ${nama}`);
-                    showToast("Data Pengurus berhasil diubah");
+                    logAktivitas('SYSTEM', `Edit Data Pengurus: ${nama}`); showToast("Data Pengurus berhasil diubah");
                 }
             } else {
-                // MODE TAMBAH
-                if(akunData.some(a => a.username === username)) {
-                    return customAlert("Username tersebut sudah digunakan! Silakan pilih username lain.");
-                }
-
+                if(akunData.some(a => a.username === username)) return customAlert("Username tersebut sudah digunakan! Silakan pilih username lain.");
                 akunData.push({ username: username, password: password, role: roleAkun, nama: nama, no_kk: null });
-
-                pengurusData.push({
-                    id: "P-" + Date.now(),
-                    nama: nama,
-                    jabatan: jabatan,
-                    mulai: mulai,
-                    selesai: selesai,
-                    hakAkses: hakAkses,
-                    status: status,
-                    username: username
-                });
-                logAktivitas('SYSTEM', `Penambahan Data Pengurus: ${nama}`);
-                showToast("Pengurus & Akun berhasil disimpan");
+                pengurusData.push({ id: "P-" + Date.now(), nama: nama, jabatan: jabatan, mulai: mulai, selesai: selesai, hakAkses: hakAkses, status: status, username: username });
+                logAktivitas('SYSTEM', `Penambahan Data Pengurus: ${nama}`); showToast("Pengurus & Akun berhasil disimpan");
             }
-            
-            closeModal('pengurusModal');
-            renderPengurus();
+            closeModal('pengurusModal'); renderPengurus();
         }
 
         function hapusPengurus(id) {
             const p = pengurusData.find(x => x.id === id);
             customConfirm(`Hapus data pengurus ${p ? p.nama : ''}?`, () => {
-                if(p && p.username) {
-                    akunData = akunData.filter(a => a.username !== p.username);
-                }
+                if(p && p.username) akunData = akunData.filter(a => a.username !== p.username);
                 pengurusData = pengurusData.filter(x => x.id !== id);
-                renderPengurus();
-                showToast("Pengurus dihapus");
+                renderPengurus(); showToast("Pengurus dihapus");
             });
         }
 
         // --- PENGATURAN ---
         function renderProfilWilayah() {
-            document.getElementById('setDesa').value = profilWilayah.desa;
-            document.getElementById('setRW').value = profilWilayah.rw;
-            document.getElementById('setRT').value = profilWilayah.rt;
-            document.getElementById('setGasUrl').value = backendUrl; // Isi url GAS jika ada
-            
-            const titleEl = document.getElementById('appSubtitle');
-            if(titleEl) {
-                titleEl.innerText = `RT ${profilWilayah.rt} / RW ${profilWilayah.rw} - ${profilWilayah.desa}`;
+            const elDesa = document.getElementById('setDesa');
+            if(elDesa) {
+                elDesa.value = profilWilayah.desa;
+                document.getElementById('setRW').value = profilWilayah.rw;
+                document.getElementById('setRT').value = profilWilayah.rt;
             }
+            const titleEl = document.getElementById('appSubtitle');
+            if(titleEl) titleEl.innerText = `RT ${profilWilayah.rt} / RW ${profilWilayah.rw} - ${profilWilayah.desa}`;
         }
 
         function saveProfilWilayah() {
             profilWilayah.desa = document.getElementById('setDesa').value;
             profilWilayah.rw = document.getElementById('setRW').value;
             profilWilayah.rt = document.getElementById('setRT').value;
-            
             logAktivitas('SYSTEM', 'Memperbarui profil wilayah RT/RW');
             showToast('Profil Wilayah Berhasil Disimpan');
             renderProfilWilayah();
@@ -1896,6 +1697,7 @@
 
         function renderRiwayat() {
             const list = document.getElementById('riwayatList');
+            if (!list) return;
             if(riwayatData.length === 0) {
                 list.innerHTML = `<li class="p-8 text-center text-slate-400">Belum ada riwayat tercatat.</li>`;
             } else {
@@ -1927,26 +1729,18 @@
             const btn = document.getElementById('btnGasConnect');
             const info = document.getElementById('gasStatusInfo');
             
-            if(!urlInput || !urlInput.includes('script.google.com')) {
-                return customAlert("Mohon masukkan URL Google Apps Script yang valid!");
-            }
+            if(!urlInput || !urlInput.includes('script.google.com')) return customAlert("Mohon masukkan URL Google Apps Script yang valid!");
 
             btn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Menghubungkan...`;
             btn.disabled = true;
 
             try {
-                // Melakukan HTTP GET untuk mengecek ping / koneksi
-                const response = await fetch(urlInput + "?action=ping", {
-                    method: 'GET'
-                });
-                
+                const response = await fetch(urlInput + "?action=ping", { method: 'GET' });
                 const result = await response.json();
                 
                 if (result.status === 'success') {
-                    backendUrl = urlInput;
                     logAktivitas('SYSTEM', 'Koneksi ke Backend GAS Berhasil Terhubung');
                     showToast('Koneksi Backend Berhasil!');
-                    
                     info.className = "mt-4 p-3 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-700 text-sm font-bold flex items-center gap-2";
                     info.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Terhubung: ${result.message}`;
                     info.classList.remove('hidden');
@@ -1964,19 +1758,11 @@
             }
         }
 
-        // NEW: Fungsi Generate GAS Code dan Copy Clipboard
         function openGasCodeModal() {
-            const dataToInject = {
-                wilayah: profilWilayah,
-                warga: wargaData,
-                keuangan: transaksiData,
-                inventaris: inventarisData,
-                pengurus: pengurusData,
-                akun: akunData
-            };
+            const dataToInject = { wilayah: profilWilayah, warga: wargaData, keuangan: transaksiData, inventaris: inventarisData, pengurus: pengurusData, akun: akunData };
 
             const gasScript = `/**
- * Backend SIM-RT v1.6 - API Google Apps Script
+ * Backend SIM-RT v2.0 Final - API Google Apps Script
  * Deploy script ini sebagai "Web App" dengan akses "Anyone" (Semua Orang).
  */
 
@@ -1986,15 +1772,13 @@ var DB_DUMMY = ${JSON.stringify(dataToInject, null, 2)};
 function doGet(e) {
   var action = e.parameter.action;
   
-  // 1. Endpoint PING (Untuk Uji Koneksi di menu Pengaturan)
   if (action === 'ping') {
     return ContentService.createTextOutput(JSON.stringify({
       status: 'success',
-      message: 'SIM-RT Apps Script v1.6 Aktif & Siap Menerima Data!'
+      message: 'SIM-RT Apps Script v2.0 Aktif & Siap Menerima Data!'
     })).setMimeType(ContentService.MimeType.JSON);
   }
 
-  // 2. Endpoint Mengambil Data Keseluruhan (Sinkronisasi Awal)
   if (action === 'getData') {
     return ContentService.createTextOutput(JSON.stringify({
       status: 'success',
@@ -2002,18 +1786,13 @@ function doGet(e) {
     })).setMimeType(ContentService.MimeType.JSON);
   }
 
-  // Fallback
-  return ContentService.createTextOutput(JSON.stringify({
-    status: 'error',
-    message: 'Parameter action tidak valid.'
-  })).setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'Parameter action tidak valid.' })).setMimeType(ContentService.MimeType.JSON);
 }
 
 function doPost(e) {
-  // Placeholder Endpoint untuk Menerima data (Save/Update)
   try {
     var payload = JSON.parse(e.postData.contents);
-    // TODO: Tambahkan logika untuk menulis ke Google Sheets disini jika perlu.
+    // TODO: Tambahkan logika untuk menulis ke Google Sheets disini.
     
     return ContentService.createTextOutput(JSON.stringify({
       status: 'success',
@@ -2022,13 +1801,9 @@ function doPost(e) {
     })).setMimeType(ContentService.MimeType.JSON);
     
   } catch(err) {
-    return ContentService.createTextOutput(JSON.stringify({
-      status: 'error',
-      message: 'Terjadi kesalahan saat parsing payload: ' + err.message
-    })).setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'Terjadi kesalahan saat parsing payload: ' + err.message })).setMimeType(ContentService.MimeType.JSON);
   }
-}
-`;
+}`;
             document.getElementById('gasCodeContainer').innerText = gasScript;
             openModal('gasCodeModal');
             logAktivitas('SYSTEM', 'Akses Generate Kode Google Apps Script');
@@ -2036,26 +1811,13 @@ function doPost(e) {
 
         function copyGasCode() {
             const textToCopy = document.getElementById('gasCodeContainer').innerText;
-            // Gunakan API Clipboard modern dengan fallback
             if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    showToast("Kode berhasil disalin!");
-                });
+                navigator.clipboard.writeText(textToCopy).then(() => { showToast("Kode berhasil disalin!"); });
             } else {
                 let textArea = document.createElement("textarea");
-                textArea.value = textToCopy;
-                textArea.style.position = "fixed";
-                textArea.style.left = "-999999px";
-                textArea.style.top = "-999999px";
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    showToast("Kode berhasil disalin!");
-                } catch (err) {
-                    customAlert("Gagal menyalin kode. Silakan block text manual dan tekan Ctrl+C");
-                }
+                textArea.value = textToCopy; textArea.style.position = "fixed"; textArea.style.left = "-999999px"; textArea.style.top = "-999999px";
+                document.body.appendChild(textArea); textArea.focus(); textArea.select();
+                try { document.execCommand('copy'); showToast("Kode berhasil disalin!"); } catch (err) { customAlert("Gagal menyalin kode. Silakan block text manual dan tekan Ctrl+C"); }
                 textArea.remove();
             }
         }
