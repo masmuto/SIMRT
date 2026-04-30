@@ -29,6 +29,14 @@
             .print-container { width: 100%; padding: 20px; color: black; }
         }
         .print-only { display: none; }
+
+        /* Animasi Peringatan Darurat */
+        @keyframes flashRed {
+            0% { background-color: rgba(225, 29, 72, 0.95); }
+            50% { background-color: rgba(159, 18, 57, 0.98); }
+            100% { background-color: rgba(225, 29, 72, 0.95); }
+        }
+        .emergency-flash { animation: flashRed 1s infinite; backdrop-filter: blur(8px); }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen overflow-hidden role-admin">
@@ -66,6 +74,29 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- OVERLAY EMERGENCY FULLSCREEN -->
+    <div id="emergencyOverlay" class="fixed inset-0 z-[1000] hidden flex-col items-center justify-center p-6 emergency-flash text-white text-center">
+        <svg class="w-32 h-32 mb-6 animate-bounce text-white drop-shadow-2xl" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+        <h1 class="text-6xl sm:text-8xl font-black uppercase tracking-tighter mb-2 shadow-black drop-shadow-2xl text-white">DARURAT!</h1>
+        <h2 id="overlayType" class="text-3xl sm:text-5xl font-bold uppercase mb-10 shadow-black drop-shadow-lg text-rose-200 border-b-4 border-rose-300/30 pb-4 inline-block px-8">JENIS DARURAT</h2>
+        
+        <div class="bg-black/40 p-6 sm:p-8 rounded-3xl max-w-3xl w-full border-2 border-white/20 backdrop-blur-md shadow-2xl text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-rose-300 text-xs font-black uppercase tracking-widest mb-1 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> Pelapor & Lokasi</p>
+                    <p id="overlayUser" class="text-xl sm:text-2xl font-bold text-white leading-tight">Nama - Alamat</p>
+                </div>
+                <div>
+                    <p class="text-rose-300 text-xs font-black uppercase tracking-widest mb-1 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Keterangan Tambahan</p>
+                    <p id="overlayNote" class="text-lg sm:text-xl font-medium text-white italic bg-rose-900/40 p-3 rounded-xl border border-rose-500/30">Keterangan darurat...</p>
+                </div>
+            </div>
+        </div>
+        
+        <p class="mt-8 text-rose-100 font-bold animate-pulse text-sm">Sinyal Peringatan sedang disiarkan ke seluruh pengurus dan warga terdekat...</p>
+        <button onclick="closeEmergencyOverlay()" class="mt-10 bg-white hover:bg-slate-200 text-rose-700 border-4 border-rose-800 px-10 py-4 rounded-2xl font-black tracking-widest uppercase transition-all shadow-2xl active:scale-95 text-lg">Matikan Peringatan</button>
     </div>
 
     <!-- MAIN APP CONTAINER -->
@@ -307,12 +338,18 @@
 
                 <!-- VIEW: KEAMANAN -->
                 <div id="view-keamanan" class="hidden space-y-6">
-                    <div class="bg-rose-50 p-8 rounded-2xl border-2 border-rose-200 flex flex-col sm:flex-row items-center justify-between shadow-md gap-4">
-                        <div class="text-center sm:text-left">
-                            <h3 class="text-rose-900 font-black text-2xl mb-1 italic uppercase tracking-tighter">Emergency Signal</h3>
-                            <p class="text-rose-700 text-sm font-medium">Gunakan tombol ini hanya dalam keadaan darurat.</p>
+                    <div class="bg-gradient-to-r from-rose-900 to-rose-700 p-8 rounded-3xl border-4 border-rose-500 flex flex-col sm:flex-row items-center justify-between shadow-2xl shadow-rose-900/30 gap-6 relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 opacity-10">
+                            <svg class="w-64 h-64 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                         </div>
-                        <button onclick="triggerPanic('SOS Panggilan Darurat')" class="bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-black py-4 px-10 rounded-full shadow-xl animate-pulse">SOS DARURAT</button>
+                        <div class="text-center sm:text-left z-10">
+                            <h3 class="text-white font-black text-3xl mb-1 italic uppercase tracking-tighter drop-shadow-md">Emergency Signal</h3>
+                            <p class="text-rose-200 text-sm font-medium">Kirim peringatan ke seluruh pengurus & warga secara langsung!</p>
+                        </div>
+                        <button onclick="openPanicModal()" class="z-10 bg-white hover:bg-rose-100 active:scale-95 text-rose-700 font-black py-4 px-12 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.4)] animate-pulse transition-all border-4 border-rose-200 text-lg uppercase tracking-widest flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            SOS DARURAT
+                        </button>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                         <div class="border-b bg-slate-50 flex justify-between items-center px-4">
@@ -524,7 +561,7 @@
                     <div class="flex justify-between items-center mb-2">
                         <h4 class="font-bold text-slate-800">Daftar Anggota</h4>
                         <button id="btnTambahAnggota" class="bg-blue-100 text-blue-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-200 transition-colors flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg Tambah Anggota
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Tambah Anggota
                         </button>
                     </div>
                     <div class="bg-white rounded-xl overflow-hidden border border-slate-200">
@@ -961,16 +998,61 @@
         </div>
     </div>
 
-    <!-- Modal Panic -->
-    <div id="panicModal" class="fixed inset-0 z-[70] hidden flex items-center justify-center px-4 bg-slate-900/80 backdrop-blur-md">
-        <div class="bg-white rounded-3xl w-full max-w-sm overflow-hidden border-4 border-rose-500 text-center p-8 shadow-2xl">
-            <h3 class="font-black text-2xl mb-2 text-rose-800 uppercase tracking-tighter">Emergency Signal</h3>
-            <div class="space-y-4 mt-6">
-                <button onclick="triggerPanic('Kebakaran')" class="w-full bg-rose-600 text-white font-black p-4 rounded-2xl shadow-lg hover:scale-105 transition-transform">🔥 KEBAKARAN</button>
-                <button onclick="triggerPanic('Kriminal')" class="w-full bg-slate-800 text-white font-black p-4 rounded-2xl shadow-lg hover:scale-105 transition-transform">🦹 MALING / KRIMINAL</button>
-                <button onclick="triggerPanic('Medis')" class="w-full bg-blue-600 text-white font-black p-4 rounded-2xl shadow-lg hover:scale-105 transition-transform">🚑 MEDIS</button>
+    <!-- NEW DETAILED PANIC MODAL -->
+    <div id="panicModal" class="fixed inset-0 z-[70] hidden flex items-center justify-center px-4 bg-slate-900/90 backdrop-blur-md">
+        <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden border-4 border-rose-600 shadow-2xl flex flex-col transition-all">
+            <!-- Header Modal -->
+            <div class="bg-rose-600 p-6 text-center text-white relative">
+                <h3 class="font-black text-3xl uppercase tracking-widest">Sinyal Darurat</h3>
+                <p class="text-rose-200 text-xs font-bold mt-1">Sistem Keamanan RT Terpadu</p>
+                <button onclick="closeModal('panicModal')" class="absolute top-4 right-4 text-rose-200 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
-            <button onclick="closeModal('panicModal')" class="mt-8 text-slate-400 font-bold text-xs uppercase tracking-widest">Batal</button>
+            
+            <!-- STEP 1: Pilih Tipe Darurat -->
+            <div class="p-6 bg-rose-50" id="panicStep1">
+                <p class="text-sm text-rose-800 font-bold mb-4 text-center border-b border-rose-200 pb-2">1. Pilih Jenis Keadaan Darurat:</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="selectPanicType('Kebakaran')" class="bg-white border-2 border-rose-200 hover:border-rose-500 hover:bg-rose-50 text-rose-700 font-black p-4 rounded-2xl shadow-sm transition-all flex flex-col items-center gap-2 text-sm">
+                        <span class="text-4xl drop-shadow-sm mb-1">🔥</span> Kebakaran
+                    </button>
+                    <button onclick="selectPanicType('Kriminal / Maling')" class="bg-white border-2 border-slate-200 hover:border-slate-800 hover:bg-slate-50 text-slate-800 font-black p-4 rounded-2xl shadow-sm transition-all flex flex-col items-center gap-2 text-sm">
+                        <span class="text-4xl drop-shadow-sm mb-1">🦹</span> Kriminal
+                    </button>
+                    <button onclick="selectPanicType('Darurat Medis')" class="bg-white border-2 border-blue-200 hover:border-blue-600 hover:bg-blue-50 text-blue-700 font-black p-4 rounded-2xl shadow-sm transition-all flex flex-col items-center gap-2 text-sm">
+                        <span class="text-4xl drop-shadow-sm mb-1">🚑</span> Medis
+                    </button>
+                    <button onclick="selectPanicType('Bencana Alam')" class="bg-white border-2 border-amber-200 hover:border-amber-500 hover:bg-amber-50 text-amber-700 font-black p-4 rounded-2xl shadow-sm transition-all flex flex-col items-center gap-2 text-sm">
+                        <span class="text-4xl drop-shadow-sm mb-1">🌊</span> Bencana
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Input Keterangan & Konfirmasi -->
+            <div class="p-6 bg-white hidden flex-col" id="panicStep2">
+                <div class="flex items-center gap-4 mb-5 border-b border-slate-100 pb-5">
+                    <span id="panicIconDetail" class="text-5xl drop-shadow-md">🚨</span>
+                    <div>
+                        <h4 id="panicTypeDetail" class="font-black text-2xl text-slate-800 uppercase tracking-tight">Tipe Darurat</h4>
+                        <p class="text-xs text-slate-500 font-bold">Kirim sinyal segera ke pengurus & warga</p>
+                    </div>
+                </div>
+                <form onsubmit="executePanic(event)" class="space-y-5">
+                    <input type="hidden" id="panicTypeInput">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest block mb-2">Lokasi / Keterangan Singkat (Opsional)</label>
+                        <input type="text" id="panicNote" placeholder="Cth: Api di dapur rumah Bpk Budi / Ada orang mencurigakan..." class="w-full border-2 border-rose-200 focus:border-rose-500 bg-white p-3 rounded-lg outline-none font-semibold text-slate-700 transition-colors">
+                    </div>
+                    <div class="flex gap-3 pt-2">
+                        <button type="button" onclick="backToPanicStep1()" class="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl text-sm transition-colors border border-slate-200">Kembali</button>
+                        <button type="submit" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-black rounded-xl text-sm shadow-xl shadow-rose-600/30 transition-all uppercase tracking-wider flex justify-center items-center gap-2 active:scale-95">
+                            <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg> 
+                            Bunyikan Alarm
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -1092,6 +1174,7 @@
         let riwayatData = [];
         let profilWilayah = { desa: "Desa Suka Maju", rw: "05", rt: "02" };
         let chartStatusInstance = null; let chartPendidikanInstance = null;
+        let currentUser = null;
         
         const namaBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -1266,7 +1349,7 @@
                 list.innerHTML = notifikasiData.length === 0 ? 
                     `<p class="p-8 text-center text-sm text-slate-400 italic">Tidak ada notifikasi.</p>` : 
                     notifikasiData.map(n => `
-                        <div class="p-4 hover:bg-slate-50 transition-colors border-b border-slate-50">
+                        <div class="p-4 hover:bg-slate-50 transition-colors border-b border-slate-50 ${n.tipe === 'alert' ? 'bg-rose-50' : ''}">
                             <p class="text-xs text-slate-800 font-bold">${n.pesan}</p>
                             <p class="text-[10px] text-slate-400 mt-1">${n.waktu}</p>
                         </div>
@@ -1935,9 +2018,8 @@
             });
         }
 
-        // --- KEAMANAN ---
+        // --- KEAMANAN & SOS DARURAT ---
         function renderKeamanan() {
-            // Render Jadwal Ronda (Matrix)
             const tbodyRonda = document.getElementById('rondaTable');
             if (tbodyRonda) {
                 let tagihanList = wargaData.filter(w => w.hubungan_kk === 'Kepala Keluarga');
@@ -1966,7 +2048,6 @@
                 }).join('');
             }
 
-            // Render Laporan Kejadian
             const kejad = document.getElementById('tab-content-kejadian');
             if (kejadianData.length === 0) {
                 kejad.innerHTML = `<div class="p-8 text-center text-slate-400">Belum ada laporan kejadian keamanan.</div>`;
@@ -1985,16 +2066,12 @@
         function toggleRonda(nama, hari) {
             const existingIndex = rondaData.findIndex(r => r.nama === nama && r.hari === hari);
             if (existingIndex > -1) {
-                // Jika sudah ada, hapus dari jadwal
                 rondaData.splice(existingIndex, 1);
                 logAktivitas('JADWAL', `Menghapus jadwal ronda: ${nama} hari ${hari}`);
             } else {
-                // Jika belum ada, tambahkan ke jadwal
                 rondaData.push({ id: "R-" + Date.now(), hari: hari, nama: nama });
                 logAktivitas('JADWAL', `Menambah jadwal ronda: ${nama} hari ${hari}`);
             }
-            // Tidak perlu render ulang semua, karena checkbox berubah otomatis saat di-klik
-            // Tetapi array data "rondaData" sudah terupdate di belakang layar
         }
 
         function handleKejadianSubmit(e) {
@@ -2006,14 +2083,78 @@
         }
 
         function deleteKejadian(id) { kejadianData = kejadianData.filter(k => k.id !== id); renderKeamanan(); showToast("Laporan diselesaikan"); }
-        
-        function triggerPanic(jenis) { 
-            showToast(`ALARM ${jenis} DIAKTIFKAN! Memanggil pihak terkait.`); 
-            kejadianData.unshift({ id: "K-" + Date.now(), laporan: "Sinyal SOS Darurat: " + jenis, tanggal: new Date().toISOString() });
-            logAktivitas('DARURAT', `Panic Button SOS ditekan: ${jenis}`);
-            tambahNotifikasi(`DARURAT SOS: Laporan ${jenis} Masuk!`, "alert");
-            closeModal('panicModal'); renderKeamanan();
-            customAlert(`🚨 ALARM DARURAT 🚨\nAnda telah membunyikan alarm darurat untuk ${jenis}.\nNotifikasi segera disebar ke seluruh warga & pos jaga!`);
+
+        // SOS DARURAT LOGIC
+        function openPanicModal() {
+            document.getElementById('panicStep1').classList.remove('hidden');
+            document.getElementById('panicStep2').classList.add('hidden');
+            document.getElementById('panicStep2').classList.remove('flex');
+            document.getElementById('panicNote').value = '';
+            openModal('panicModal');
+        }
+
+        function selectPanicType(type) {
+            const icons = {
+                'Kebakaran': '🔥',
+                'Kriminal / Maling': '🦹',
+                'Darurat Medis': '🚑',
+                'Bencana Alam': '🌊'
+            };
+            document.getElementById('panicTypeInput').value = type;
+            document.getElementById('panicTypeDetail').innerText = type;
+            document.getElementById('panicIconDetail').innerText = icons[type] || '🚨';
+            
+            document.getElementById('panicStep1').classList.add('hidden');
+            document.getElementById('panicStep2').classList.remove('hidden');
+            document.getElementById('panicStep2').classList.add('flex');
+            document.getElementById('panicNote').focus();
+        }
+
+        function backToPanicStep1() {
+            document.getElementById('panicStep1').classList.remove('hidden');
+            document.getElementById('panicStep2').classList.add('hidden');
+            document.getElementById('panicStep2').classList.remove('flex');
+        }
+
+        function executePanic(e) {
+            e.preventDefault();
+            const type = document.getElementById('panicTypeInput').value;
+            const note = document.getElementById('panicNote').value;
+            
+            let reporterInfo = "Sistem / Admin";
+            let addr = "Pusat RT";
+
+            if (currentUser && currentUser.nama) {
+                reporterInfo = currentUser.nama;
+                if (currentUser.role === 'warga') {
+                    const w = wargaData.find(x => x.no_kk === currentUser.no_kk && x.hubungan_kk === 'Kepala Keluarga');
+                    if (w) addr = w.alamat;
+                } else {
+                    addr = "Kantor Sekretariat RT";
+                }
+            }
+
+            const identitasLengkap = `${reporterInfo} - ${addr}`;
+            const laporanTeks = `Sinyal Darurat: ${type}. Dilaporkan oleh: ${reporterInfo} (${addr}). ${note ? 'Keterangan: ' + note : ''}`;
+            
+            kejadianData.unshift({ id: "K-" + Date.now(), laporan: laporanTeks, tanggal: new Date().toISOString() });
+            logAktivitas('DARURAT', `Sinyal Darurat dibunyikan: ${type}`);
+            tambahNotifikasi(`🚨 DARURAT: ${type} dilaporkan oleh ${reporterInfo}!`, "alert");
+            
+            renderKeamanan();
+            closeModal('panicModal');
+            
+            // Tampilkan Overlay Full Screen
+            document.getElementById('overlayType').innerText = type;
+            document.getElementById('overlayUser').innerText = identitasLengkap;
+            document.getElementById('overlayNote').innerText = note || "(Tidak ada keterangan tambahan)";
+            document.getElementById('emergencyOverlay').classList.remove('hidden');
+            document.getElementById('emergencyOverlay').classList.add('flex');
+        }
+
+        function closeEmergencyOverlay() {
+            document.getElementById('emergencyOverlay').classList.add('hidden');
+            document.getElementById('emergencyOverlay').classList.remove('flex');
         }
 
         // --- INVENTARIS ---
