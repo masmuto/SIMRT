@@ -38,6 +38,21 @@
         }
         .emergency-flash { animation: flashRed 1s infinite; backdrop-filter: blur(8px); }
     </style>
+    <script type="text/javascript">
+    // Menonaktifkan Klik Kanan
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Menonaktifkan Pintasan Keyboard (Ctrl+C, Ctrl+U, F12)
+    document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey && (event.key === 'c' || event.key === 'u' || event.key === 's')) {
+            event.preventDefault();
+        }
+        if (event.key === 'F12') {
+            event.preventDefault();
+        }
+    });
+</script>
+
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen overflow-hidden role-admin">
 
